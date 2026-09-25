@@ -13,11 +13,8 @@ tags: [随笔, 教程, 部署, 置顶]
 
 写这篇，是想记录下这个博客的由来，也想把它分享给同样想拥有一块自己空间的朋友。如果你也想要这样一个博客，下面这份「照着做就能上线」的步骤，应该能帮你省下不少折腾。
 
-<!--
-插图占位符：博客首页效果图
-替换方法：把下面这行取消注释，并把图片放进 posts/images/ 目录（例如 posts/images/home.png）
-![博客首页效果](./images/home.png)
--->
+![博客首页效果](./images/my-blog-is-live/my-blog-is-live-1.png)
+
 
 ## 几个我比较喜欢的地方
 
@@ -28,11 +25,8 @@ tags: [随笔, 教程, 部署, 置顶]
 - **展示 GitHub 贡献热力图**：把写代码的活跃度直接放在首页。
 - **改完自动上线**：只要把改动推送到 GitHub，网站就会自动重新构建并更新，不用手动操作。
 
-<!--
-插图占位符：四季昼夜切换效果对比图
-替换方法：取消注释并替换图片路径
-![四季与昼夜主题效果](./images/themes.png)
--->
+![四季与昼夜主题效果](./images/my-blog-is-live/my-blog-is-live-siji.png)
+
 
 ## 上手前，你需要准备
 
@@ -49,11 +43,9 @@ tags: [随笔, 教程, 部署, 置顶]
 2. 点击右上角的 **Fork** 按钮。
 3. 在弹窗里直接点 **Create fork**，几秒后你就拥有了一份属于你自己的副本。
 
-<!--
-插图占位符：GitHub 仓库页面的 Fork 按钮位置
-替换方法：取消注释并替换图片路径
-![点击仓库右上角的 Fork 按钮](./images/fork-button.png)
--->
+
+![点击仓库右上角的 Fork 按钮](./images/my-blog-is-live/my-blog-is-live-2.png)
+
 
 > 小提示：Fork 出来的仓库默认名还是原来的名字。如果你希望博客地址是 `https://你的用户名.github.io/` 这种干净形式，可以稍后把仓库改名为 `你的用户名.github.io`（改法见文末「常见问题」）。
 
@@ -86,11 +78,9 @@ tags: [随笔, 教程, 部署, 置顶]
 - 首页头像：替换 `src/assets/Avatar.jpg`。在网页上打开这个文件，点右上角的「删除」再「上传」即可换图，或用编辑器的「上传文件」功能覆盖。
 - 站点小图标（浏览器标签页上的图标）：替换 `public/favicon.ico`，同样是上传覆盖。
 
-<!--
-插图占位符：修改后的个人信息展示效果
-替换方法：取消注释并替换图片路径
-![首页个人资料区效果](./images/profile.png)
--->
+
+![首页个人资料区效果](./images/my-blog-is-live/my-blog-is-live-3.png)
+
 
 ## 第三步：写下你的第一篇文章
 
@@ -145,11 +135,8 @@ Fork 出来的仓库，GitHub 默认是「禁用自动任务」的。请打开�
 2. 左侧菜单点 **Pages**。
 3. 在 **Build and deployment** 区域的 **Source** 下拉框里，选择 **GitHub Actions**。
 
-<!--
-插图占位符：Settings → Pages 中选择 GitHub Actions 的界面
-替换方法：取消注释并替换图片路径
-![在 Settings → Pages 中选择 GitHub Actions](./images/pages-source.png)
--->
+![在 Settings → Pages 中选择 GitHub Actions](./images/my-blog-is-live/my-blog-is-live-4.png)
+
 
 ### 4.3 触发第一次部署
 
@@ -161,11 +148,8 @@ Fork 出来的仓库，GitHub 默认是「禁用自动任务」的。请打开�
 
 部署完成后，地址可以在 **Settings → Pages** 页面顶部看到（形如 `https://你的用户名.github.io/仓库名/`），或者在 **Actions** 里那次成功运行的 `deploy` 步骤详情里查看。
 
-<!--
-插图占位符：部署成功后查看站点地址
-替换方法：取消注释并替换图片路径
-![部署成功后的站点地址](./images/deploy-done.png)
--->
+![部署成功后的站点地址](./images/my-blog-is-live/my-blog-is-live-5.png)
+
 
 把这个地址复制到浏览器打开，就是你的个人博客了。
 
