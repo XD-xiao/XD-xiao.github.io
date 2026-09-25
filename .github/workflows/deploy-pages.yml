@@ -1,0 +1,69 @@
+# 构建 Vue 3 + Vite 静态站点并部署到 GitHub Pages
+#
+# 注意：本项目是 Vue + Vite 项目，必须先用 `vite build` 生成可运行的 JS/CSS，
+# 不能使用 actions/jekyll-build-pages —— Jekyll 只会原样复制源码，
+# 既不安装 npm 依赖、也不执行 vite build，结果必然是白屏。
+name: Deploy to GitHub Pages
+
+on:
+  # 推送到默认分支时自动部署
+  push:
+    branches: ["main"]
+
+  # 允许在 Actions 页面手动触发
+  workflow_dispatch:
+
+# 授予 GITHUB_TOKEN 部署到 Pages 所需的最小权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只允许一个 Pages 部署；不打断进行中的发布
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          # 与 package.json 的 engines (^22.18.0 || >=24.12.0) 保持一致
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        # vite.config.js 会依据 GITHUB_REPOSITORY 自动推导 base 路径：
+        #   <owner>.github.io 仓库 -> '/'            （用户站点）
+        #   其他仓库名            -> '/<repo>/'     （项目站点）
+        # 因此本地开发与线上部署共用同一份配置，无需手工改动
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 只上传构建产物；Pages 直接托管该产物，不再经过 Jekyll 处理
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
