@@ -81,7 +81,7 @@ md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
   return defaultLinkOpen(tokens, idx, options, env, self)
 }
 
-// 图片：将相对路径解析为构建后的资源 URL（支持 posts/ 目录内相对引用的图片、动图）
+// 图片：将相对路径解析为构建后的资源 URL（支持相对引用与 @/ 别名的图片、动图）
 const defaultImage =
   md.renderer.rules.image ||
   ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options))

@@ -4,7 +4,7 @@
 
 ## 功能特性
 
-- 📝 使用 Markdown 写作，放入 `posts/` 目录即自动成为一篇博文
+- 📝 使用 Markdown 写作，放入 `src/assets/posts/` 目录即自动成为一篇博文
 - 🎨 明暗 × 四季 × 时段（黎明/白天/黄昏/夜晚/深夜）动态换肤，带粒子背景
 - 📊 展示 GitHub 提交热力图
 - 🕐 可交互的时间钟与日历，联动驱动页面季节与昼夜外观
@@ -20,7 +20,7 @@
 | vue-router | 路由（Hash 模式，静态托管下刷新不 404） |
 | markdown-it | Markdown 解析 |
 | highlight.js | 代码高亮 |
-| chokidar | 开发时监听 `posts/` 文件变化 |
+| chokidar | 开发时监听 `src/assets/posts/` 文件变化 |
 
 ## 项目结构
 
@@ -29,14 +29,14 @@ StaticBlog/
 ├── .github/
 │   └── workflows/
 │       └── deploy-pages.yml       # GitHub Actions 自动部署工作流
-├── posts/                          # 博客文章（Markdown），增删改会实时生效
-│   ├── images/                     # 文章内引用的图片（如 avatar.png）
-│   ├── hello-world.md
-│   └── ...
 ├── public/
 │   └── favicon.ico                 # 站点图标
 ├── src/
-│   ├── assets/                     # 头像、bilibili 图标等静态资源
+│   ├── assets/                     # 头像、站点图标、博客文章与配图等静态资源
+│   │   ├── posts/                  # 博客文章（Markdown），增删改会实时生效
+│   │   │   └── my-blog-is-live.md
+│   │   ├── img/                    # 博客配图（文中用 ../img/... 相对引用）
+│   │   │   └── my-blog-is-live/
 │   │   ├── Avatar.jpg              # 首页个人头像
 │   │   └── bilibili.svg
 │   ├── components/                 # 页面组件（资料卡、日历、热力图、卡片等）
@@ -44,7 +44,7 @@ StaticBlog/
 │   │   └── useTheme.js             # 主题状态（季节/昼夜/时段）逻辑
 │   ├── lib/
 │   │   ├── markdown.js             # Markdown 渲染与 frontmatter 解析
-│   │   ├── posts.js                # 汇总 posts/ 目录为博文数据
+│   │   ├── posts.js                # 汇总 src/assets/posts/ 目录为博文数据
 │   │   └── themeColors.js          # 依据 config 生成主题色 CSS 并注入 <head>
 │   ├── router/
 │   │   └── index.js                # 路由（hash 模式）
@@ -55,7 +55,7 @@ StaticBlog/
 │   └── style.css                   # 全局样式
 ├── index.html                      # HTML 模板（含 <title> 硬编码标题）
 ├── vite.config.js                  # Vite 配置（自动推导 base 路径）
-├── vite-plugin-posts.js            # 自定义插件：读取并监听 posts/ 目录
+├── vite-plugin-posts.js            # 自定义插件：读取并监听 src/assets/posts/ 目录
 └── package.json
 ```
 
@@ -77,7 +77,7 @@ npm run build
 npm run preview
 ```
 
-开发时，在 `posts/` 目录新增、修改或删除 `.md` 文件，页面会自动刷新。
+开发时，在 `src/assets/posts/` 目录新增、修改或删除 `.md` 文件，页面会自动刷新。
 
 ## 配置文件：`src/config.js`
 
@@ -127,7 +127,7 @@ theme: {
 
 ## 撰写博客文章
 
-文章放在 `posts/` 目录下，使用 Markdown 编写，文件名（去除 `.md` 后缀）即为文章 URL 路径。支持通过 YAML 风格的 frontmatter 声明元信息：
+文章放在 `src/assets/posts/` 目录下，使用 Markdown 编写，文件名（去除 `.md` 后缀）即为文章 URL 路径。支持通过 YAML 风格的 frontmatter 声明元信息：
 
 ```markdown
 ---
@@ -151,7 +151,7 @@ frontmatter 支持的字段：
 | `description` | 简介（不写则取正文首段前 120 字） |
 | `tags` | 标签数组；其中包含 `置顶` 时文章置顶 |
 
-文章内的图片使用相对路径引用，支持 `png / jpg / jpeg / gif（动图）/ webp / svg / bmp / ico / avif` 等格式，例如 `![头像](./images/avatar.png)`。
+文章内的图片放在 `src/assets/img/` 目录下（建议每篇文章建一个同名子文件夹），文中用相对路径 `../img/...` 引用，支持 `png / jpg / jpeg / gif（动图）/ webp / svg / bmp / ico / avif` 等格式，例如 `![配图](../img/hello-world/avatar.png)`。
 
 ## Fork 后如何改造
 
@@ -162,7 +162,7 @@ Fork 本仓库后，按以下顺序把内容替换成你自己的：
 3. **替换头像与图标**：
    - 首页头像 → 替换 `src/assets/Avatar.jpg`
    - 站点 favicon → 替换 `public/favicon.ico`
-4. **替换文章**：清空或直接修改 `posts/` 目录下的 Markdown 文件，换成你自己的内容。
+4. **替换文章**：清空或直接修改 `src/assets/posts/` 目录下的 Markdown 文件，换成你自己的内容。
 5. **（可选）调整热力图**：若使用其他贡献图服务，修改 `heatmapUrl`，保持 `{username}` 占位符即可。
 
 ## GitHub Actions 自动部署

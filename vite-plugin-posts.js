@@ -6,8 +6,8 @@ import { watch } from 'chokidar'
 const MODULE_ID = 'virtual:posts'
 const RESOLVED_ID = '\0' + MODULE_ID
 
-// 博文 Markdown 源文件的专属文件夹（位于项目根目录下的 posts/）
-const postsDir = fileURLToPath(new URL('./posts', import.meta.url))
+// 博文 Markdown 源文件的专属文件夹（位于 src/assets/posts/）
+const postsDir = fileURLToPath(new URL('./src/assets/posts', import.meta.url))
 
 function walk(dir) {
   const result = []
@@ -55,7 +55,7 @@ export default function vitePluginPosts() {
       return null
     },
     configureServer(server) {
-      // 监听 posts/ 文件夹：新增、删除、修改都会触发浏览器刷新
+      // 监听 src/assets/posts/ 文件夹：新增、删除、修改都会触发浏览器刷新
       const watcher = watch(postsDir, { ignoreInitial: true })
 
       const refresh = () => {

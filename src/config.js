@@ -1,7 +1,7 @@
 // 站点与个人信息的集中配置，改这里即可更新首页展示内容。
 export const siteConfig = {
   name: 'Static_',
-  bio: '一名热爱开源与前端开发的工程师，这里记录我的项目与学习笔记。',
+  bio: '',
   githubUsername: 'XD-xiao',
   // 个人签名（首页打字机 + 手写下划线效果）
   signature: '保持好奇，保持热爱。',

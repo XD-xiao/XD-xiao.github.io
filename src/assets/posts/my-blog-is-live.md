@@ -13,7 +13,11 @@ tags: [随笔, 教程, 部署, 置顶]
 
 写这篇，是想记录下这个博客的由来，也想把它分享给同样想拥有一块自己空间的朋友。如果你也想要这样一个博客，下面这份「照着做就能上线」的步骤，应该能帮你省下不少折腾。
 
-![博客首页效果](./images/my-blog-is-live/my-blog-is-live-1.png)
+![博客首页效果](../img/my-blog-is-live/my-blog-is-live-1.png)
+
+
+
+
 
 
 ## 几个我比较喜欢的地方
@@ -25,7 +29,7 @@ tags: [随笔, 教程, 部署, 置顶]
 - **展示 GitHub 贡献热力图**：把写代码的活跃度直接放在首页。
 - **改完自动上线**：只要把改动推送到 GitHub，网站就会自动重新构建并更新，不用手动操作。
 
-![四季与昼夜主题效果](./images/my-blog-is-live/my-blog-is-live-siji.png)
+![四季与昼夜主题效果](../img/my-blog-is-live/my-blog-is-live-siji.png)
 
 
 ## 上手前，你需要准备
@@ -44,7 +48,7 @@ tags: [随笔, 教程, 部署, 置顶]
 3. 在弹窗里直接点 **Create fork**，几秒后你就拥有了一份属于你自己的副本。
 
 
-![点击仓库右上角的 Fork 按钮](./images/my-blog-is-live/my-blog-is-live-2.png)
+![点击仓库右上角的 Fork 按钮](../img/my-blog-is-live/my-blog-is-live-2.png)
 
 
 > 小提示：Fork 出来的仓库默认名还是原来的名字。如果你希望博客地址是 `https://你的用户名.github.io/` 这种干净形式，可以稍后把仓库改名为 `你的用户名.github.io`（改法见文末「常见问题」）。
@@ -79,14 +83,14 @@ tags: [随笔, 教程, 部署, 置顶]
 - 站点小图标（浏览器标签页上的图标）：替换 `public/favicon.ico`，同样是上传覆盖。
 
 
-![首页个人资料区效果](./images/my-blog-is-live/my-blog-is-live-3.png)
+![首页个人资料区效果](../img/my-blog-is-live/my-blog-is-live-3.png)
 
 
 ## 第三步：写下你的第一篇文章
 
-所有文章都放在 `posts/` 文件夹里，一个 `.md` 文件就是一篇博客。
+所有文章都放在 `src/assets/posts/` 文件夹里，一个 `.md` 文件就是一篇博客。
 
-在 GitHub 网页上进入 `posts/` 文件夹，点 **Add file → Create new file**，把文件名写成 `my-first-post.md`（注意 `.md` 后缀），然后粘贴下面的内容：
+在 GitHub 网页上进入 `src/assets/posts/` 文件夹，点 **Add file → Create new file**，把文件名写成 `my-first-post.md`（注意 `.md` 后缀），然后粘贴下面的内容：
 
 ```markdown
 ---
@@ -115,10 +119,10 @@ tags: [随笔]
 
 正文用 Markdown 写即可：`#` 是标题，`-` 是列表，`**加粗**`，`[链接](地址)` 是超链接。
 
-文章里要放图片时，把图片上传到 `posts/images/` 文件夹，然后在文中用相对路径引用，例如：
+文章里要放图片时，把图片上传到 `src/assets/img/` 文件夹（建议每篇文章建一个同名子文件夹），然后在文中用相对路径 `../img/...` 引用，例如：
 
 ```markdown
-![配图](./images/my-image.png)
+![配图](../img/my-first-post/my-image.png)
 ```
 
 ## 第四步：开启自动部署，让博客上线
@@ -135,7 +139,7 @@ Fork 出来的仓库，GitHub 默认是「禁用自动任务」的。请打开�
 2. 左侧菜单点 **Pages**。
 3. 在 **Build and deployment** 区域的 **Source** 下拉框里，选择 **GitHub Actions**。
 
-![在 Settings → Pages 中选择 GitHub Actions](./images/my-blog-is-live/my-blog-is-live-4.png)
+![在 Settings → Pages 中选择 GitHub Actions](../img/my-blog-is-live/my-blog-is-live-4.png)
 
 
 ### 4.3 触发第一次部署
@@ -148,7 +152,7 @@ Fork 出来的仓库，GitHub 默认是「禁用自动任务」的。请打开�
 
 部署完成后，地址可以在 **Settings → Pages** 页面顶部看到（形如 `https://你的用户名.github.io/仓库名/`），或者在 **Actions** 里那次成功运行的 `deploy` 步骤详情里查看。
 
-![部署成功后的站点地址](./images/my-blog-is-live/my-blog-is-live-5.png)
+![部署成功后的站点地址](../img/my-blog-is-live/my-blog-is-live-5.png)
 
 
 把这个地址复制到浏览器打开，就是你的个人博客了。
@@ -157,7 +161,7 @@ Fork 出来的仓库，GitHub 默认是「禁用自动任务」的。请打开�
 
 很简单：**改了文件 → 提交 → 自动更新**。
 
-- 想发新文章：在 `posts/` 里新建 `.md` 文件并提交。
+- 想发新文章：在 `src/assets/posts/` 里新建 `.md` 文件并提交。
 - 想改个人介绍：改 `src/config.js` 提交。
 - 想换头像：上传新图片覆盖提交。
 
@@ -205,7 +209,7 @@ npm install   # 安装依赖
 npm run dev   # 启动本地预览，浏览器打开 http://localhost:5173
 ```
 
-本地编辑 `posts/` 下的文件，页面会自动刷新。确认没问题后 `git push` 上去，网站就会自动更新。
+本地编辑 `src/assets/posts/` 下的文件，页面会自动刷新。确认没问题后 `git push` 上去，网站就会自动更新。
 
 > 对大多数只想「有个自己的博客」的朋友来说，第四步的网页操作已经足够，本地开发不是必选项。
 
