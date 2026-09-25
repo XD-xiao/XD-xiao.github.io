@@ -5,7 +5,7 @@ import { extractMeta, renderMarkdown } from './markdown'
 // 支持 png / jpg / jpeg / gif（动图）/ webp / svg 等常见格式
 const imageModules = import.meta.glob(
   '/src/assets/img/**/*.{png,jpg,jpeg,gif,webp,svg,bmp,ico,avif}',
-  { eager: true, as: 'url' }
+  { eager: true, query: '?url', import: 'default' }
 )
 
 // 把 @/ 别名或绝对路径统一成 import.meta.glob 的 key（/src/... 绝对路径）
