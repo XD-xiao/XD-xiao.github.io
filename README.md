@@ -2,6 +2,8 @@
 
 一个基于 **Vue 3 + Vite** 的纯静态个人博客，支持用 Markdown 写文章、自动生成文章列表与详情页，并可通过 **GitHub Actions 一键自动部署到 GitHub Pages**。
 
+【视频】：【使用Github Pages+Actions 推送即部署 个人博客】 https://www.bilibili.com/video/BV1HVhX6AEjw/?share_source=copy_web&vd_source=6b1c883929d4485a98b0d839d5153210
+
 ## 功能特性
 
 - 📝 使用 Markdown 写作，放入 `src/assets/posts/` 目录即自动成为一篇博文
