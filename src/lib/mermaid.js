@@ -33,7 +33,7 @@ function themeVariables(dark) {
   return {
     background: 'transparent',
     fontFamily: readVar('--font', 'sans-serif'),
-    fontSize: '14px',
+    fontSize: '11px',
     primaryColor: surface2,
     primaryTextColor: text,
     primaryBorderColor: primary,
@@ -83,8 +83,10 @@ async function ensureInitialized(themeKey) {
     securityLevel: 'strict',
     theme: 'base',
     themeVariables: themeVariables(dark),
-    flowchart: { curve: 'basis', htmlLabels: true, useMaxWidth: true },
-    sequence: { useMaxWidth: true },
+    // 关闭 useMaxWidth：按真实字号自然渲染，宽图由外层容器横向滚动，
+    // 避免整图被压缩到容器宽度后文字过小。
+    flowchart: { curve: 'basis', htmlLabels: true, useMaxWidth: false },
+    sequence: { useMaxWidth: false },
   })
   initializedTheme = themeKey
 

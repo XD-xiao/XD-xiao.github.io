@@ -158,20 +158,25 @@ code {
 
 /* ===== Mermaid 图（```mermaid 代码块，由 src/lib/mermaid.js 渲染） ===== */
 .markdown-body .mermaid-block {
-  display: flex;
-  justify-content: center;
   margin: 1.5em 0;
+  padding: 24px 16px;
   overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm),
+    inset 0 1px 0 color-mix(in srgb, var(--season-secondary) 22%, transparent);
 }
 
+/* 窄图居中，宽图可横向滚动：width: max-content 让容器按内容宽度展开 */
 .markdown-body .mermaid {
-  max-width: 100%;
+  width: max-content;
+  margin: 0 auto;
 }
 
 .markdown-body .mermaid svg {
   display: block;
-  max-width: 100%;
-  height: auto;
+  max-width: none;
   margin: 0 auto;
 }
 
