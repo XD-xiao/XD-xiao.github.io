@@ -156,6 +156,42 @@ code {
   font-size: 0.86rem;
 }
 
+/* ===== Mermaid 图（```mermaid 代码块，由 src/lib/mermaid.js 渲染） ===== */
+.markdown-body .mermaid-block {
+  display: flex;
+  justify-content: center;
+  margin: 1.5em 0;
+  overflow-x: auto;
+}
+
+.markdown-body .mermaid {
+  max-width: 100%;
+}
+
+.markdown-body .mermaid svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* 尚未渲染 / 渲染失败：把源码按代码块样式显示，而不是留一片空白 */
+.markdown-body .mermaid:not([data-processed]) {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm),
+    inset 0 1px 0 color-mix(in srgb, var(--season-secondary) 22%, transparent);
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  white-space: pre;
+  overflow-x: auto;
+}
+
 /* 夜间模式：代码高亮切换为 GitHub Dark 配色，保证在暗色玻璃底上可读 */
 html[data-mode='dark'] .hljs {
   color: #c9d1d9;

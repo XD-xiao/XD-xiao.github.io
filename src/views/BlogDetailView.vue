@@ -1,18 +1,44 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ThemeBackground from '../components/ThemeBackground.vue'
 import PageBar from '../components/PageBar.vue'
 import { posts } from '../lib/posts'
+import { renderMermaid, rerenderMermaid } from '../lib/mermaid'
 import { useTheme } from '../composables/useTheme'
 
 // 主题生命周期跟随详情页：进入挂载（写 data-* + 走时），离开清除
-const { mount, unmount } = useTheme()
+const { mount, unmount, mode, season } = useTheme()
 onMounted(mount)
 onUnmounted(unmount)
 
 const route = useRoute()
 const post = computed(() => posts.find((p) => p.id === route.params.id))
+
+// ===== Mermaid 图 =====
+const articleRef = ref(null)
+// 主题指纹：明暗 + 季节都变了才需要重绘
+const themeKey = computed(() => `${mode.value}-${season.value}`)
+
+onMounted(async () => {
+  await nextTick()
+  renderMermaid(articleRef.value, themeKey.value)
+})
+
+// 切换文章（路由复用同一组件）或首次拿到 html 后渲染
+watch(
+  () => post.value?.html,
+  async () => {
+    await nextTick()
+    renderMermaid(articleRef.value, themeKey.value)
+  }
+)
+
+// 换肤后重绘，让图跟随页面配色
+watch(themeKey, async () => {
+  await nextTick()
+  rerenderMermaid(articleRef.value, themeKey.value)
+})
 
 // 目录：从渲染后的正文提取 h1–h3（仅最高三层），并读取标题锚点 id
 const headings = computed(() => {
@@ -95,7 +121,7 @@ onUnmounted(() => {
             <span v-for="t in post.tags" :key="t" class="tag">{{ t }}</span>
           </span>
         </div>
-        <article class="markdown-body" v-html="post.html"></article>
+        <article ref="articleRef" class="markdown-body" v-html="post.html"></article>
       </template>
 
       <div v-else class="empty">

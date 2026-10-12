@@ -55,6 +55,12 @@ md.renderer.rules.fence = (tokens, idx, options, env, self) => {
   const code = token.content
   const lang = (token.info || '').trim().split(/\s+/)[0]
 
+  // Mermaid 图：先输出源码容器，挂载后由 src/lib/mermaid.js 画成图。
+  // 渲染失败（语法错误 / 模块未加载）时容器保留源码，由 style.css 回退成代码块。
+  if (lang === 'mermaid') {
+    return `<div class="mermaid-block"><div class="mermaid">${md.utils.escapeHtml(code)}</div></div>`
+  }
+
   if (lang && hljs.getLanguage(lang)) {
     try {
       const highlighted = hljs.highlight(code, { language: lang, ignoreIllegals: true }).value
